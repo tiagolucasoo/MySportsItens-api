@@ -10,4 +10,4 @@ if not MONGO_URI:
     raise Exception("Variável do Mongo não configurada")
 
 client = AsyncIOMotorClient(MONGO_URI)
-db = client.MySportItens
+db = client.data
