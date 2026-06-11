@@ -1,2 +1,4 @@
-"fastapi[standard]"
-"pymongo[srv]"
+fastapi[standard]
+pymongo[srv]
+motor
+python-dotenv

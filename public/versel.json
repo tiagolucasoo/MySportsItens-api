@@ -2,10 +2,6 @@
     "version": 2,
     "builds": [
         {
-            "src": "public/**/*",
-            "use": "@vercel/static"
-        },
-        {
             "src": "api/controller.py",
             "use": "@vercel/python"
         }
