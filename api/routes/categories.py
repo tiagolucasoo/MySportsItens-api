@@ -7,6 +7,10 @@ router = APIRouter()
 @router.get("/")
 async def list_categories():
     categories = await db.categories.find().to_list(length=100)
+    
+    for category in categories:
+        category["_id"] = str(category["_id"])
+        
     return categories
 
 @router.post("/")
