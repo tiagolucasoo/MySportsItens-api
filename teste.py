@@ -2,14 +2,12 @@ import os
 from pymongo import MongoClient
 from dotenv import load_dotenv
 
-# Carrega a string direto do seu .env
 load_dotenv()
 uri = os.getenv("MONGO_URI")
 
 if not uri:
     print("Erro: MONGO_URI não encontrada no .env")
 else:
-    # O timeout de 5000ms evita que fique travado por 30 segundos
     client = MongoClient(uri, serverSelectionTimeoutMS=5000)
 
     try:
