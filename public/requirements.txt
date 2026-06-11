@@ -2,4 +2,4 @@ fastapi[standard]
 pymongo[srv]
 motor
 python-dotenv
-bcrypt
+PyJWT
