@@ -1,9 +1,14 @@
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
 from api.routes import categories, orders, products, users
 from dotenv import load_dotenv
 
 load_dotenv()
 app = FastAPI()
+
+@app.get("/", include_in_schema=False)
+async def docs_redirect():
+    return RedirectResponse(url="/docs")
 
 app.include_router(categories.router, prefix='/api/categories')
 #app.include_router(orders.router, prefix='/api/orders')
