@@ -1,9 +1,10 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from api.services.auth import admin_only, all_users
 from api.models.cart import Cart
 from api.database import db
 from datetime import datetime
 
-router = APIRouter()
+router = APIRouter(tags=["Carts"], prefix="/carts")
 
 @router.get("/{user_code}")
 async def get_cart(user_code: str):
@@ -16,7 +17,7 @@ async def get_cart(user_code: str):
     return cart
 
 @router.post("/")
-async def upsert_cart(cart: Cart):
+async def insert_cart(cart: Cart, user = Depends(admin_only)):
     cart.updated_at = datetime.utcnow()
     cart_dict = cart.model_dump(by_alias=True, exclude_none=True)
     

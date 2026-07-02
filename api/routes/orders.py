@@ -1,12 +1,13 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from api.models.order import Order
 from api.database import db
 import uuid
+from api.services.auth import admin_only, all_users
 
-router = APIRouter()
+router = APIRouter(tags=["Orders"], prefix="/orders")
 
 @router.get("/{user_code}")
-async def list_user_orders(user_code: str):
+async def list_orders(user_code: str):
     orders = await db.orders.find({"userCode": user_code}).sort("createdAt", -1).to_list(length=100)
     
     for order in orders:
@@ -15,7 +16,7 @@ async def list_user_orders(user_code: str):
     return orders
 
 @router.post("/")
-async def create_order(order: Order):
+async def create_order(order: Order, user = Depends(admin_only)):
     if not order.code or order.code == "":
         order.code = f"ORDER-{uuid.uuid4().hex[:6].upper()}"
 

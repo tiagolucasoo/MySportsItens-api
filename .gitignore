@@ -1,1 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+
+# Environment Variables
 .env
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# Python cache
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Logs
+*.log
+
+# SQLite
+*.sqlite3
+*.db
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads
+uploads/
+media/
+
+# MongoDB local
+dump/
+
+# FastAPI
+.openapi.json
+
+# Temporary files
+*.tmp
+*.temp

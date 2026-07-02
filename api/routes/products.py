@@ -1,8 +1,9 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from api.models.product import Product
 from api.database import db
+from api.services.auth import admin_only, all_users
 
-router = APIRouter()
+router = APIRouter(tags=["Products"], prefix="/products")
 
 @router.get("/")
 async def list_products():
@@ -14,6 +15,6 @@ async def list_products():
     return products
 
 @router.post("/")
-async def create_product(product: Product):
+async def create_product(product: Product, user = Depends(admin_only)):
     new_product = await db.products.insert_one(product.model_dump(by_alias=True, exclude_none=True))
     return {"id": str(new_product.inserted_id)}
